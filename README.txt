@@ -9,6 +9,8 @@ Currently, only output of the simulator is ATA Data binary file (description in 
 If you are using simulator for scientific papers, please cite the work;
 J. S. Kulpa, W. C. Barott, "SIGNAL SIMULATOR FOR RFI MITIGATION ALGORITHMS TESTING", presented during GlobalSIP 2018 Conference. The paper will be avaliable on IEEExplore
 
+For any further requests or suggestions, please contact kulpaj.dev@gmail.com
+
 Please note that some files depends on leap second count.
 Please check ATATools.Misc.TAI2UTC and ATATools.Misc.UTC2TAI files for correctnes. 
 Last leap second update: Dec 2016
