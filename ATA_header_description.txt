@@ -1,0 +1,40 @@
+ATA data files contains 72 byte header followed by IQ data stream.
+
+The streams contains data from one polarization and one antenna. One file may contain up to 4 streams, however the simulator creates separate files for each stream.
+In general, N samples are signed integers interleaved for M streams as follows:
+
+I1_S1 Q1_S1 I1_S2 Q1_S2 .... I1_SM Q1_SM I2_S1 Q2_S1 I2_S2 Q1_S2 .... IN_SM QN_SM
+
+
+The header is 72 bytes. Bytes are in little endian order as follows (in parenthis is the data type used)
+
+0-7:
+Serial Number of data [0 for simulator] (uint32)| Bins Per Frame [hardware recording] (uint16) | Bins Per Channel [if data was not truncated, actual samples per stream ] (uint16) |
+
+8-15:
+FCenter [MHz] (float64) | 
+
+16-23:
+FSky [hardware freq settings] (float64) | 
+
+24-31:
+Bandwidth [MHz] (float64) |
+
+32-39:
+gain [linear gain] (float64) | 
+
+40-43:
+version [expected 2] (uint8) | bits per sample [8/16/32 for int8/int16/int32 respectively] (uint8) |  type [expected 2 for time_domain/complex/integer samples] (uint8) | hdr length [should be 72] (uint8) | 
+
+44-51:
+TAI start recording time [sec] (uint32) | TAI nanosecond after last full second [nanoseconds * 2^32] (uint32) |
+
+52-55:
+no of streams [1-4] (uint8) | polarization [4x2 bits (2 bits per stream)] (uint8) | TC [fixed at 2048] (uint16) |
+
+56-63:
+flags [6:center frequency already calculated correctly 1-4: IFFT flag for each stream] (uint32) | miriad no.  stream 1 (uint16) | miriad no.  stream 2 (uint16) |
+
+64-71:
+miriad no.  stream 3 (uint16) | miriad no.  stream 4 (uint16) | reserved [zeros] (uint32) |
+
