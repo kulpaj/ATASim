@@ -1,0 +1,42 @@
+<simulator>
+    <!-- simulation time -->
+    <time start="1383104952.8" blockTime="0.1"  obsTime="1.4" />
+    
+    <!-- system frequency range [Hz] -->
+    <freq fs="12.032e6" center="1e9"/>
+    
+    <!-- scene class ingredients -->
+    <!-- scene sinks definition -->
+    <sinks>
+        <antenna_file>C:\ATA\ATASim\example_files\ata.ant</antenna_file>
+        <dump_dir>C:\ATA\ATASim\SimResults</dump_dir>
+        
+        <antenna id="1" temp="0">
+            <!--
+            <beam type="Pencil" gain="30" width="1"/>
+            -->
+            <beam type="Omni"/>
+            <steering file="C:\ATA\ATASim\example_files\casa.ephem"/>
+        </antenna>
+    </sinks>
+    
+    <!-- scene sources definition -->
+    <sources>
+        <ground name="RFI1">
+            <powerdbw>1</powerdbw>
+            <position x="12340" y="10" z="0"/>
+            <beamSteering azimuth="40" elevation="30"/>
+            <beam type="Omni"/>
+            <signal type="chirp">
+                <!--<linear relPower="0" freq0="1.0000005e9" freq1="1.0000327e9" tRamp = "0.073"/>-->
+                <linear relPower="0" freq0="1.0000327e9" freq1="1.0000005e9" tRamp = "0.073"/>
+                <!--<linear relPower="0" freq0="1.0050005e9" freq1="0.99503e9" tRamp = "0.07"/>-->
+                <!--<linear relPower="-20" freq0="0.9950005e9" freq1="1.00503e9" tRamp = "0.14"/>-->
+                <!--<geometric relPower="0" freq0="1.0000005e9" freq1="1.0000327e9" tRamp = "0.073"/>-->
+                <!--<geometric relPower="0" freq0="0.9999005e9" freq1="0.99999e9" tRamp = "0.0731"/>-->
+                <!--<geometric relPower="0" freq0="0.995005e9" freq1="0.99999e9" tRamp = "0.0731"/>-->
+                <!--<geometric relPower="0" freq0="0.995005e9" freq1="1.005005e9" tRamp = "0.0731"/>-->
+            </signal>
+        </ground>
+    </sources>
+</simulator>

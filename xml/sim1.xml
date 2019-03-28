@@ -1,0 +1,57 @@
+<simulator>
+    <!-- simulation time -->
+    <time start="1383104952.8" blockTime="0.1"  obsTime="0.3" />
+    
+    <!-- system frequency range [Hz] -->
+    <freq fs="12.032e6" center="1e9"/>
+    
+    <!-- scene class ingredients -->
+    <!-- scene sinks definition -->
+    <sinks>
+        <antenna_file>C:\ATA\ATASim\example_files\ata.ant</antenna_file>
+        <dump_dir>C:\ATA\ATASim\SimResults</dump_dir>
+        
+        <antenna id="1" temp="45.9">
+            <beam type="Omni"/>
+            <steering file="C:\ATA\ATASim\example_files\casa.ephem"/>
+        </antenna>
+        <antenna id="2" temp="100">
+            <beam type="Pencil" gain="20" width="10"/>
+            <steering azimuth="40" elevation="30"/>
+        </antenna>
+    </sinks>
+    
+    <!-- scene sources definition -->
+    <sources>
+        <celestial name="casa">
+            <ephFile>C:\ATA\ATASim\example_files\casa.ephem</ephFile>
+            <powLevel>1e-6</powLevel>
+            <signal type="bandNoise" specResolution="500">
+            <passband relPower="-10" startFreq="0.994e9" stopFreq="1.006e9" />
+            
+            <passband relPower="0" startFreq="1.000e9" stopFreq="1.004e9">
+                <shapeinterp type="spline" freq="1.000e9;1.001e9;1.002e9;1.003e9;1.004e9" normdb="0;-1;-1;-3;-10"/>
+                <shapeinterp type="1/f2"/>
+            </passband>
+            
+            <passband relPower="-3" startFreq="1.004e9" stopFreq="1.005e9">
+                <shapeinterp type="gaussian" sigma="0.5"/>
+            </passband>
+            
+            <passband relPower="-3" startFreq="0.996e9" stopFreq="1e9">
+                <shapeinterp type="function" value="@(x)sin(x)+1"/>
+                <!-- The function should all be [gainAbsLin] = gainFunction(frequency [Hz]) -->
+            </passband>
+        </celestial>
+        <ground name="RFI1">
+            <powerdbw>1</powerdbw>
+            <position x="13" y="0" z="0"/>
+            <beamSteering azimuth="40" elevation="30"/>
+            <beam type="Pencil" gain="20" width="10"/>
+            <signal type="sin">
+                <harmonic relPower="0" freq="1.001e9"/>
+                <harmonic relPower="-10" freq="1.002e9"/>
+            </signal>
+        </ground>
+    </sources>
+</simulator>

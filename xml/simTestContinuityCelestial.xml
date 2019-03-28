@@ -1,0 +1,33 @@
+<simulator>
+    <!-- simulation time -->
+    <time start="1383104952.8" blockTime="0.1"  obsTime="0.3" />
+    
+    <!-- system frequency range [Hz] -->
+    <freq fs="104.8576e6" center="1e9"/>
+    
+    <!-- scene class ingredients -->
+    <!-- scene sinks definition -->
+    <sinks>
+        <antenna_file>C:\ATA\ATASim\example_files\ata.ant</antenna_file>
+        <dump_dir>C:\ATA\ATASim\SimResults\contcel</dump_dir>
+        
+        <antenna id="1" temp="0">
+            <!--
+            <beam type="Pencil" gain="30" width="1"/>
+            -->
+            <beam type="Omni"/>
+            <steering file="C:\ATA\ATASim\example_files\casa.ephem"/>
+        </antenna>
+    </sinks>
+    
+    <!-- scene sources definition -->
+    <sources>
+         <celestial name="casa">
+            <ephFile>C:\ATA\ATASim\example_files\casa.ephem</ephFile>
+            <powLevel>1e-3</powLevel>
+            <signal type="sin">
+                <harmonic relPower="0" freq="1.000000034e9"/>
+            </signal>
+        </celestial>
+    </sources>
+</simulator>
